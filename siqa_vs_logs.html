@@ -1,0 +1,702 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    
+    <script src="plotly-latest.min.js"></script>
+    <script src="math.min.js"></script>
+    <script src="d3.min.js"></script>
+  </head>
+  <body>
+<style type="text/css">
+div{
+/*top:-25px;*/
+left:150px;
+}
+</style>
+<!----------------------------------------------------------------------------- -->
+<!----------------------------------------------------------------------------- -->
+<!----------------------------------------------------------------------------- -->
+<!----------------------------------------------------------------------------- -->
+<table style="width:100%">
+  <!----------------------- FIRST ROW ----------------------------------------- -->
+  <tr>
+    <td><div id="myDiv" style="width: 860px; height: 540px;"></div></td>
+  </tr>
+  <!----------------------- Second ROW ----------------------------------------- -->
+  <tr>
+	<td align="center">
+		<div class="control-row"> Variable Axis-x: <select id="var_x_axis_off" onchange="a();">
+		<option>mean x</option><option>std x</option><option>var x</option><option>median x</option><option>kurtosis x</option><option>skewness x</option><option>max x</option><option>min x</option><option>mean y</option><option>std y</option><option>var y</option><option>median y</option><option>kurtosis y</option><option>skewness y</option><option>max y</option><option>min y</option><option>mean z</option><option>std z</option><option>var z</option><option>median z</option><option>kurtosis z</option><option>skewness z</option><option>max z</option><option>min z</option><option>mean Rx</option><option>std Rx</option><option>var Rx</option><option>median Rx</option><option>kurtosis Rx</option><option>skewness Rx</option><option>max Rx</option><option>min Rx</option><option>mean Ry</option><option>std Ry</option><option>var Ry</option><option>median Ry</option><option>kurtosis Ry</option><option>skewness Ry</option><option>max Ry</option><option>min Ry</option><option>mean Rz</option><option>std Rz</option><option>var Rz</option><option>median Rz</option><option>kurtosis Rz</option><option>skewness Rz</option><option>max Rz</option><option>min Rz</option><option>mean tt</option><option>std tt</option><option>var tt</option><option>median tt</option><option>kurtosis tt</option><option>skewness tt</option><option>max tt</option><option>min tt</option><option>mean tr</option><option>std tr</option><option>var tr</option><option>median tr</option><option>kurtosis tr</option><option>skewness tr</option><option>max tr</option><option>min tr</option>
+		</select></div>
+		<div class="control-row"> Variable Axis-y: <select id="var_y_axis_off" onchange="a();">
+    <option>mean y</option><option>std y</option><option>var y</option><option>median y</option><option>kurtosis y</option><option>skewness y</option><option>max y</option><option>min y</option><option>mean z</option><option>std z</option><option>var z</option><option>median z</option><option>kurtosis z</option><option>skewness z</option><option>max z</option><option>min z</option><option>mean Rx</option><option>std Rx</option><option>var Rx</option><option>median Rx</option><option>kurtosis Rx</option><option>skewness Rx</option><option>max Rx</option><option>min Rx</option><option>mean Ry</option><option>std Ry</option><option>var Ry</option><option>median Ry</option><option>kurtosis Ry</option><option>skewness Ry</option><option>max Ry</option><option>min Ry</option><option>mean Rz</option><option>std Rz</option><option>var Rz</option><option>median Rz</option><option>kurtosis Rz</option><option>skewness Rz</option><option>max Rz</option><option>min Rz</option><option>mean tt</option><option>std tt</option><option>var tt</option><option>median tt</option><option>kurtosis tt</option><option>skewness tt</option><option>max tt</option><option>min tt</option><option>mean tr</option><option>std tr</option><option>var tr</option><option>median tr</option><option>kurtosis tr</option><option>skewness tr</option><option>max tr</option><option>min tr</option>
+    </select></div>
+    <!--<div class="control-row"> Variable Axis-z: <select id="var_z_axis_off" onchange="a();">
+    <option>Unpaired Expert 1 OIQ</option><option>Unpaired Expert 2 OIQ</option><option>Unpaired Expert 3 OIQ</option><option>Unpaired Expert 4 OIQ</option>
+    <option>Unpaired Expert 1 MA</option><option>Unpaired Expert 2 MA</option><option>Unpaired Expert 3 MA</option><option>Unpaired Expert 4 MA</option>
+    <option>Paired Expert 1 OIQ</option><option>Paired Expert 2 OIQ</option><option>Paired Expert 3 OIQ</option><option>Paired Expert 4 OIQ</option>
+    <option>Paired Expert 1 MA</option><option>Paired Expert 2 MA</option><option>Paired Expert 3 MA</option><option>Paired Expert 4 MA</option>
+    </select></div>-->
+  </td>
+	<!--<td>OIQ = Overall Image Quality</td><td>MA = Motion Artifacts</td>-->
+</tr>
+</table> 
+
+<!----------------------------------------------------------------------------- -->
+<!----------------------------------------------------------------------------- -->
+<!----------------------------------------------------------------------------- -->
+<!----------------------------------------------------------------------------- -->
+<hr>
+<table style="width:100%">
+ <!----------------------- FIRST ROW ----------------------------------------- -->
+  <tr>
+    <td><div id="myDiv_MA" style="width: 860px; height: 540px;"></div></td>
+  </tr>
+  <!----------------------- Second ROW ----------------------------------------- -->
+  <tr>
+  <td align="center">
+    <div class="control-row"> Variable Axis-x: <select id="var_x_axis_off_b" onchange="b();">
+    <option>mean x</option><option>std x</option><option>var x</option><option>median x</option><option>kurtosis x</option><option>skewness x</option><option>max x</option><option>min x</option><option>mean y</option><option>std y</option><option>var y</option><option>median y</option><option>kurtosis y</option><option>skewness y</option><option>max y</option><option>min y</option><option>mean z</option><option>std z</option><option>var z</option><option>median z</option><option>kurtosis z</option><option>skewness z</option><option>max z</option><option>min z</option><option>mean Rx</option><option>std Rx</option><option>var Rx</option><option>median Rx</option><option>kurtosis Rx</option><option>skewness Rx</option><option>max Rx</option><option>min Rx</option><option>mean Ry</option><option>std Ry</option><option>var Ry</option><option>median Ry</option><option>kurtosis Ry</option><option>skewness Ry</option><option>max Ry</option><option>min Ry</option><option>mean Rz</option><option>std Rz</option><option>var Rz</option><option>median Rz</option><option>kurtosis Rz</option><option>skewness Rz</option><option>max Rz</option><option>min Rz</option><option>mean tt</option><option>std tt</option><option>var tt</option><option>median tt</option><option>kurtosis tt</option><option>skewness tt</option><option>max tt</option><option>min tt</option><option>mean tr</option><option>std tr</option><option>var tr</option><option>median tr</option><option>kurtosis tr</option><option>skewness tr</option><option>max tr</option><option>min tr</option>
+    </select></div>
+    <div class="control-row"> Variable Axis-y: <select id="var_y_axis_off_b" onchange="b();">
+    <option>mean y</option><option>std y</option><option>var y</option><option>median y</option><option>kurtosis y</option><option>skewness y</option><option>max y</option><option>min y</option><option>mean z</option><option>std z</option><option>var z</option><option>median z</option><option>kurtosis z</option><option>skewness z</option><option>max z</option><option>min z</option><option>mean Rx</option><option>std Rx</option><option>var Rx</option><option>median Rx</option><option>kurtosis Rx</option><option>skewness Rx</option><option>max Rx</option><option>min Rx</option><option>mean Ry</option><option>std Ry</option><option>var Ry</option><option>median Ry</option><option>kurtosis Ry</option><option>skewness Ry</option><option>max Ry</option><option>min Ry</option><option>mean Rz</option><option>std Rz</option><option>var Rz</option><option>median Rz</option><option>kurtosis Rz</option><option>skewness Rz</option><option>max Rz</option><option>min Rz</option><option>mean tt</option><option>std tt</option><option>var tt</option><option>median tt</option><option>kurtosis tt</option><option>skewness tt</option><option>max tt</option><option>min tt</option><option>mean tr</option><option>std tr</option><option>var tr</option><option>median tr</option><option>kurtosis tr</option><option>skewness tr</option><option>max tr</option><option>min tr</option>
+    </select></div>
+    <!--<div class="control-row"> Variable Axis-z: <select id="var_z_axis_off" onchange="a();">
+    <option>Unpaired Expert 1 OIQ</option><option>Unpaired Expert 2 OIQ</option><option>Unpaired Expert 3 OIQ</option><option>Unpaired Expert 4 OIQ</option>
+    <option>Unpaired Expert 1 MA</option><option>Unpaired Expert 2 MA</option><option>Unpaired Expert 3 MA</option><option>Unpaired Expert 4 MA</option>
+    <option>Paired Expert 1 OIQ</option><option>Paired Expert 2 OIQ</option><option>Paired Expert 3 OIQ</option><option>Paired Expert 4 OIQ</option>
+    <option>Paired Expert 1 MA</option><option>Paired Expert 2 MA</option><option>Paired Expert 3 MA</option><option>Paired Expert 4 MA</option>
+    </select></div>-->
+  </td>
+  <!--<td>OIQ = Overall Image Quality</td><td>MA = Motion Artifacts</td>-->
+</tr>
+  
+</table> 
+<!----------------------------------------------------------------------------- -->
+<!----------------------------------------------------------------------------- -->
+<!------------        OVERALL IMAGE QUALITY   --------------------------------- -->
+<!----------------------------------------------------------------------------- -->  
+<script>
+document.addEventListener('DOMContentLoaded',a , false); 
+function a() {
+// Load all csv files //  
+d3.csv('test_unpaired_siqa_off.csv', function(csv) {
+    unpaired_siqa_off = csv;
+  }); 
+d3.csv('test_unpaired_siqa_on.csv', function(csv) {
+    unpaired_siqa_on = csv;
+  }); 
+d3.csv('test_paired_siqa_off.csv', function(csv) {
+    paired_siqa_off = csv;
+  }); 
+d3.csv('test_paired_siqa_on.csv', function(csv) {
+    paired_siqa_on = csv;
+  });
+d3.csv('logs_stat_PMC_ON.csv', function(csv) {
+    rows_on = csv;
+  });
+
+// plot//            
+Plotly.d3.csv('logs_stat_PMC_OFF.csv', function(err, rows){   
+function unpack(rows, key) {  
+  return rows.map(function(row)
+  { return row[key]; });}
+
+  var e = document.getElementById("var_x_axis_off");
+  var strUser = e.options[e.selectedIndex].text;
+  var test_x = strUser;
+
+  var f = document.getElementById("var_y_axis_off");
+  var strUserf = f.options[f.selectedIndex].text;
+  var test_y = strUserf;
+// ************************************************************************************* //
+// ************************************************************************************* //
+// PMC OFF //
+// ************************************************************************************* //
+// ************************************************************************************* //
+  var trace1 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(unpaired_siqa_off,'Unpaired Expert 1 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Unpaired Expert 1, OIQ, PMC OFF',  
+  type: 'scatter3d'
+};
+
+  var trace2 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(unpaired_siqa_off,'Unpaired Expert 2 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Unpaired Expert 2, OIQ, PMC OFF',  
+  type: 'scatter3d'
+};
+
+  var trace3 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(unpaired_siqa_off,'Unpaired Expert 3 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Unpaired Expert 3, OIQ, PMC OFF',  
+  type: 'scatter3d'
+};
+
+ var trace4 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(unpaired_siqa_off,'Unpaired Expert 4 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Unpaired Expert 4, OIQ, PMC OFF',  
+  type: 'scatter3d'
+};
+
+var trace9 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(paired_siqa_off,'Paired Expert 1 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Paired Expert 1, OIQ, PMC OFF',  
+  type: 'scatter3d'
+};
+
+var trace10 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(paired_siqa_off,'Paired Expert 2 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Paired Expert 2, OIQ, PMC OFF',  
+  type: 'scatter3d'
+};
+
+  var trace11 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(paired_siqa_off,'Paired Expert 3 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Paired Expert 3, OIQ, PMC OFF',  
+  type: 'scatter3d'
+};
+
+ var trace12 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(paired_siqa_off,'Paired Expert 4 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Paired Expert 4, OIQ, PMC OFF',  
+  type: 'scatter3d'
+};
+
+// ************************************************************************************* //
+// ************************************************************************************* //
+// PMC ON //
+// ************************************************************************************* //
+// ************************************************************************************* //
+  var trace5 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(unpaired_siqa_on,'Unpaired Expert 1 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Unpaired Expert 1, OIQ, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace6 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(unpaired_siqa_on,'Unpaired Expert 2 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Unpaired Expert 2, OIQ, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace7 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(unpaired_siqa_on,'Unpaired Expert 3 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Unpaired Expert 3, OIQ, PMC ON',  
+  type: 'scatter3d'
+};
+
+ var trace8 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(unpaired_siqa_on,'Unpaired Expert 4 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Unpaired Expert 4, OIQ, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace13 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(paired_siqa_on,'Paired Expert 1 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Paired Expert 1, OIQ, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace14 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(paired_siqa_on,'Paired Expert 2 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Paired Expert 2, OIQ, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace15 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(paired_siqa_on,'Paired Expert 3 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Paired Expert 3, OIQ, PMC ON',  
+  type: 'scatter3d'
+};
+
+ var trace16 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(paired_siqa_on,'Paired Expert 4 OIQ'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Paired Expert 4, OIQ, PMC ON',  
+  type: 'scatter3d'
+};
+
+// Plot 1, Overall Image Quality //
+var data = [trace1, trace2, trace3, trace4,trace9,trace10,trace11,trace12,     // PMC OFF
+            trace5, trace6, trace7, trace8,trace13,trace14,trace15, trace16 ]; // PMC ON
+var layout = {
+  title: 'Subjective Image Quality Assessment, Overall Image Quality',
+  margin: {
+  l: 50,
+  r: 50,
+  b: 50,
+  t: 100}
+  };
+
+Plotly.newPlot('myDiv', data, layout);
+});
+}
+</script>
+<!----------------------------------------------------------------------------- -->
+<!----------------------------------------------------------------------------- -->
+<!------------        MOTION ARTIFACTS    ------------------------------------- -->
+<!----------------------------------------------------------------------------- -->  
+<script>
+document.addEventListener('DOMContentLoaded',b , false); 
+function b() {
+// Load all csv files //  
+d3.csv('test_unpaired_siqa_off.csv', function(csv) {
+    unpaired_siqa_off = csv;
+  }); 
+d3.csv('test_unpaired_siqa_on.csv', function(csv) {
+    unpaired_siqa_on = csv;
+  }); 
+d3.csv('test_paired_siqa_off.csv', function(csv) {
+    paired_siqa_off = csv;
+  }); 
+d3.csv('test_paired_siqa_on.csv', function(csv) {
+    paired_siqa_on = csv;
+  });
+d3.csv('logs_stat_PMC_OFF.csv', function(csv) {
+    rows_on = csv;
+  });
+
+// plot//            
+Plotly.d3.csv('logs_stat_PMC_OFF.csv', function(err, rows){   
+function unpack(rows, key) {  
+  return rows.map(function(row)
+  { return row[key]; });}
+
+  var e = document.getElementById("var_x_axis_off_b");
+  var strUser = e.options[e.selectedIndex].text;
+  var test_x = strUser;
+
+  var f = document.getElementById("var_y_axis_off_b");
+  var strUserf = f.options[f.selectedIndex].text;
+  var test_y = strUserf;
+
+// ************************************************************************************* //
+// ************************************************************************************* //
+// PMC OFF //
+// ************************************************************************************* //
+// ************************************************************************************* //
+  var trace1 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(unpaired_siqa_off,'Unpaired Expert 1 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Unpaired Expert 1, MA, PMC OFF',  
+  type: 'scatter3d'
+};
+
+  var trace2 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(unpaired_siqa_off,'Unpaired Expert 2 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Unpaired Expert 2, MA, PMC OFF',  
+  type: 'scatter3d'
+};
+
+  var trace3 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(unpaired_siqa_off,'Unpaired Expert 3 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Unpaired Expert 3, MA, PMC OFF',  
+  type: 'scatter3d'
+};
+
+ var trace4 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(unpaired_siqa_off,'Unpaired Expert 4 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Unpaired Expert 4, MA, PMC OFF',  
+  type: 'scatter3d'
+};
+
+  var trace9 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(paired_siqa_off,'Paired Expert 1 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Paired Expert 1, MA, PMC OFF',  
+  type: 'scatter3d'
+};
+
+  var trace10 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(paired_siqa_off,'Paired Expert 2 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Paired Expert 2, MA, PMC OFF',  
+  type: 'scatter3d'
+};
+
+  var trace11 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(paired_siqa_off,'Paired Expert 3 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Paired Expert 3, MA, PMC OFF',  
+  type: 'scatter3d'
+};
+
+ var trace12 = {
+  x: unpack(rows, test_x), 
+  y: unpack(rows, test_y),
+  z: unpack(paired_siqa_off,'Paired Expert 4 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 6,
+    line: {
+    //color: 'rgba(217, 217, 217, 0.14)',
+    color: 'rgb(217,217,217)',
+    width: 0.05},
+    opacity: 3.9},
+  name: 'Paired Expert 4, MA, PMC OFF',  
+  type: 'scatter3d'
+};
+
+// ************************************************************************************* //
+// ************************************************************************************* //
+// PMC ON //
+// ************************************************************************************* //
+// ************************************************************************************* //
+  var trace5 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(unpaired_siqa_on,'Unpaired Expert 1 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Unpaired Expert 1, MA, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace6 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(unpaired_siqa_on,'Unpaired Expert 2 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Unpaired Expert 2, MA, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace7 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(unpaired_siqa_on,'Unpaired Expert 3 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Unpaired Expert 3, MA, PMC ON',  
+  type: 'scatter3d'
+};
+
+ var trace8 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(unpaired_siqa_on,'Unpaired Expert 4 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Unpaired Expert 4, MA, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace13 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(paired_siqa_on,'Paired Expert 1 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Paired Expert 1, MA, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace14 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(paired_siqa_on,'Paired Expert 2 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Paired Expert 2, MA, PMC ON',  
+  type: 'scatter3d'
+};
+
+  var trace15 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(paired_siqa_on,'Paired Expert 3 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Paired Expert 3, MA, PMC ON',  
+  type: 'scatter3d'
+};
+
+ var trace16 = {
+  x: unpack(rows_on, test_x), 
+  y: unpack(rows_on, test_y),
+  z: unpack(paired_siqa_on,'Paired Expert 4 MA'), 
+  mode: 'markers',
+  marker: {
+    size: 16,
+    line: {
+    color: 'rgba(209, 217, 215, 0.14)',
+    width: 0.05},
+    opacity: 0.9},
+  name: 'Paired Expert 4, MA, PMC ON',  
+  type: 'scatter3d'
+};
+
+// Plot 1, Overall Image Quality //
+var data = [trace1, trace2, trace3, trace4, trace9, trace10,trace11,trace12,
+            trace5, trace6, trace7, trace8, trace13, trace14, trace15, trace16];
+var layout = {
+  title: 'Subjective Image Quality Assessment, Motion Artifacts',
+  margin: {
+  l: 50,
+  r: 50,
+  b: 50,
+  t: 100}
+  };
+
+Plotly.newPlot('myDiv_MA', data, layout);
+});
+}
+</script>
+</body>
+</html>
